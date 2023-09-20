@@ -45,7 +45,7 @@ namespace CleanArchitecture.Domain.Tests
         public void CreateProduct_WithNameNull_ReturnDomainExceptionValidation()
         {
             //Arrange
-            string name = null;
+            string? name = null;
             string description = "Description";
             decimal price = 1;
             int stock = 1;
@@ -80,7 +80,7 @@ namespace CleanArchitecture.Domain.Tests
         {
             //Arrange
             string name = "Name";
-            string description = "";
+            string? description = null;
             decimal price = 1;
             int stock = 1;
             string image = "Image";
@@ -158,6 +158,24 @@ namespace CleanArchitecture.Domain.Tests
 
             //Assert
             action.Should().Throw<DomainExceptionValidation>().WithMessage("Invalid image. Too long, maximum 250 characters.");
+        }
+        
+        [Fact]
+        public void CreateProduct_WithImageNull_ReturnObjectValidState()
+        {
+            //Arrange
+            string name = "Name";
+            string description = "Description";
+            decimal price = 1;
+            int stock = 1;
+            string? image = null;
+
+            //Act
+            Action action = () => new Product(name, description, price, stock, image);
+
+            //Assert
+            action.Should().NotThrow<DomainExceptionValidation>();
+            action.Should().NotThrow<NullReferenceException>();
         }
     }
 }
