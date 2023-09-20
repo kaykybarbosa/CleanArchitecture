@@ -19,7 +19,6 @@ namespace CleanArchitecture.Domain.Entities
             Id = id;
             
             ValidationDomain(name, description, price, stock, image);
-
         }
         
         public Product(string name, string description, decimal price, int stock, string image)
