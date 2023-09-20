@@ -1,7 +1,12 @@
+using CleanArchitecture.Infra.IoC;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Configure MyInfrastructure
+builder.Services.AddInfractructure(builder.Configuration);
 
 var app = builder.Build();
 
