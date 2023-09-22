@@ -9,42 +9,43 @@ namespace CleanArchitecture.Application.Services
 {
     public class CategoryService : ICategoryService
     {
-        private ICategoryRepository _categoryRepository;
+        private ICategoryRepository _repository;
         private readonly IMapper _mapper;
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+
+        public CategoryService(ICategoryRepository repository, IMapper mapper)
         {
-            _categoryRepository = categoryRepository;
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _mapper = mapper;
         }
 
         public async Task<IEnumerable<CategoryResponse>> GetCategories()
         {
-            var categories = await _categoryRepository.GetAll();
+            var categories = await _repository.GetAll();
             return _mapper.Map<IEnumerable<CategoryResponse>>(categories); 
         }
 
         public async Task<CategoryResponse> GetById(int? id)
         {
-            var category = await _categoryRepository.GetById(id);
+            var category = await _repository.GetById(id);
             return _mapper.Map<CategoryResponse>(category);
         }
 
         public async Task Add(CategoryRequest request)
         {
             var category = _mapper.Map<Category>(request);
-            await _categoryRepository.Create(category);
+            await _repository.Create(category);
         }
 
         public async Task Update(CategoryRequest request)
         {
             var category = _mapper.Map<Category>(request);
-            await _categoryRepository.Update(category);
+            await _repository.Update(category);
         }
 
         public async Task Remove(int? id)
         {
-            var category = await _categoryRepository.GetById(id);
-            await _categoryRepository.Remove(category);
+            var category = await _repository.GetById(id);
+            await _repository.Remove(category);
         }
     }
 }
