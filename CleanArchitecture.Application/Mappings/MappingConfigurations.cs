@@ -3,6 +3,7 @@ using CleanArchitecture.Application.DTOs.Requests.Category;
 using CleanArchitecture.Application.DTOs.Requests.Product;
 using CleanArchitecture.Application.DTOs.Responses.Category;
 using CleanArchitecture.Application.DTOs.Responses.Product;
+using CleanArchitecture.Application.Products.Commands;
 using CleanArchitecture.Domain.Entities;
 
 namespace CleanArchitecture.Application.Mappings
@@ -16,6 +17,9 @@ namespace CleanArchitecture.Application.Mappings
 
             CreateMap<ProductRequest, Product>();
             CreateMap<Product, ProductResponse>();
+
+            CreateMap<ProductRequest, ProductCreateCommand>();
+            CreateMap<ProductRequest, ProductUpdateCommand>();
         }
     }
 }

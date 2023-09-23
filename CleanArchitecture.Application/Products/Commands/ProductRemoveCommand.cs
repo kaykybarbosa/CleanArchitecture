@@ -11,3 +11,4 @@ namespace CleanArchitecture.Application.Products.Commands
             Id = id;
         }
     }
+}
