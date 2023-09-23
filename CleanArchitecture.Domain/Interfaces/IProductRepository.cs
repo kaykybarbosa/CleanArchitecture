@@ -6,7 +6,6 @@ namespace CleanArchitecture.Domain.Interfaces
     {
         Task<IEnumerable<Product>> GetAllAsync();
         Task<Product> GetByIdAsync(int? id);
-        Task<Product> GetCategoryAsync(int? id);
 
         Task<Product> CreateAsync(Product product);
         Task<Product> UpdateAsync(Product product);
