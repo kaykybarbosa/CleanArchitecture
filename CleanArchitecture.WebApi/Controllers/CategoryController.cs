@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Application.Interfaces;
+﻿using CleanArchitecture.Application.DTOs.Requests.Category;
+using CleanArchitecture.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.WebApi.Controllers
@@ -16,6 +17,22 @@ namespace CleanArchitecture.WebApi.Controllers
         {
             var categories = await _service.GetCategories();
             return View(categories);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Create(CategoryRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.Add(request);
+            }
+
+            return View("Index");
         }
     }
 }
