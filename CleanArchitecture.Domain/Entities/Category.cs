@@ -15,7 +15,7 @@ namespace CleanArchitecture.Domain.Entities
 
         public Category(int id, string name)
         {
-            DomainExceptionValidation.When(id <= 0, "Invalid id value.");
+            DomainExceptionValidation.When(id < 0, "Invalid id value.");
             Id = id;
             ValidationDomain(name);
         }
