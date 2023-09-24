@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using CleanArchitecture.Application.DTOs.Requests.Category;
-using CleanArchitecture.Application.DTOs.Requests.Product;
-using CleanArchitecture.Application.DTOs.Responses.Category;
-using CleanArchitecture.Application.DTOs.Responses.Product;
+using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.Products.Commands;
 using CleanArchitecture.Domain.Entities;
 
@@ -12,14 +9,11 @@ namespace CleanArchitecture.Application.Mappings
     {
         public MappingConfigurations()
         {
-            CreateMap<CategoryRequest, Category>();
-            CreateMap<Category, CategoryResponse>();
+            CreateMap<CategoryDTO, Category>().ReverseMap();
+            CreateMap<ProductDTO, Product>().ReverseMap();
 
-            CreateMap<ProductRequest, Product>();
-            CreateMap<Product, ProductResponse>();
-
-            CreateMap<ProductRequest, ProductCreateCommand>();
-            CreateMap<ProductRequest, ProductUpdateCommand>();
+            CreateMap<ProductDTO, ProductCreateCommand>();
+            CreateMap<ProductDTO, ProductUpdateCommand>();
         }
     }
 }

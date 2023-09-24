@@ -1,11 +1,10 @@
-﻿using CleanArchitecture.Domain.Entities;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CleanArchitecture.Application.DTOs.Requests.Product
+namespace CleanArchitecture.Application.DTOs
 {
-    public class ProductRequest
+    public class ProductDTO : BaseDTO
     {
         [MinLength(3)]
         [MaxLength(100)]

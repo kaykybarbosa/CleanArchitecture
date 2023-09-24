@@ -1,9 +1,8 @@
-﻿using CleanArchitecture.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace CleanArchitecture.Application.DTOs.Requests.Category
+namespace CleanArchitecture.Application.DTOs
 {
-    public class CategoryRequest
+    public class CategoryDTO : BaseDTO
     {
         [MinLength(3)]
         [MaxLength(100)]

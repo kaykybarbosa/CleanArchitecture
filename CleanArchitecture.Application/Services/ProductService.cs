@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using CleanArchitecture.Application.DTOs.Requests.Product;
-using CleanArchitecture.Application.DTOs.Responses.Product;
+using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Products.Commands;
 using CleanArchitecture.Application.Products.Queries;
@@ -19,7 +18,7 @@ namespace CleanArchitecture.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductResponse>> GetAll()
+        public async Task<IEnumerable<ProductDTO>> GetAll()
         {
             var productQuery = new GetProductsQuery();
 
@@ -28,10 +27,10 @@ namespace CleanArchitecture.Application.Services
 
             var products = await _mediator.Send(productQuery);
 
-            return _mapper.Map<IEnumerable<ProductResponse>>(products);
+            return _mapper.Map<IEnumerable<ProductDTO>>(products);
         }
 
-        public async Task<ProductResponse> GetById(int? id)
+        public async Task<ProductDTO> GetById(int? id)
         {
             var productQuery = new GetProductByIdQuery(id.Value);
 
@@ -40,10 +39,10 @@ namespace CleanArchitecture.Application.Services
 
             var product = await _mediator.Send(productQuery);
 
-            return _mapper.Map<ProductResponse>(product);
+            return _mapper.Map<ProductDTO>(product);
         }
 
-        public async Task Add(ProductRequest request)
+        public async Task Add(ProductDTO request)
         {
             var productCommand = _mapper.Map<ProductCreateCommand>(request);
 
@@ -51,7 +50,7 @@ namespace CleanArchitecture.Application.Services
 
         }
 
-        public async Task Update(ProductRequest request)
+        public async Task Update(ProductDTO request)
         {
             var productCommand = _mapper.Map<ProductUpdateCommand>(request);
 

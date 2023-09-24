@@ -1,14 +1,13 @@
-﻿using CleanArchitecture.Application.DTOs.Requests.Category;
-using CleanArchitecture.Application.DTOs.Responses.Category;
+﻿using CleanArchitecture.Application.DTOs;
 
 namespace CleanArchitecture.Application.Interfaces
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<CategoryResponse>> GetCategories();
-        Task<CategoryResponse> GetById(int? id);
-        Task Add(CategoryRequest request);
-        Task Update(CategoryRequest request);
+        Task<IEnumerable<CategoryDTO>> GetCategories();
+        Task<CategoryDTO> GetById(int? id);
+        Task Add(CategoryDTO request);
+        Task Update(CategoryDTO request);
         Task Remove(int? id);
     }
 }
