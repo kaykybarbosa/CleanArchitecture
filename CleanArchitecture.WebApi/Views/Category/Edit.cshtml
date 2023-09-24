@@ -1,34 +1,30 @@
 ﻿@model CleanArchitecture.Application.DTOs.CategoryDTO
 
 @{
-    ViewData["Title"] = "Register New Category";
+    ViewData["Title"] = "Edit Category";
 }
 
-<style>
-    .model-lg {
-        max-width: 80%;
-    }
-</style>
+<form asp-action="Edit">
+    <input asp-for="Id" hidden />
 
-<form asp-action="Create">
     <div class="container">
         <h2>@ViewData["Title"]</h2>
 
         <hr />
 
         <div class="row">
-            <label asp-for="Name" class="control-label pt-2"></label>
+            <label asp-for="Name" class="control-label"></label>
             <div class="col-md-5">
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
             <div>
-                <br /> 
+                <br />
             </div>
 
             <div class="col-md-2">
-                <input type="submit" value="Create" class="btn btn-success form-control" />
+                <input type="submit" value="Edit" class="btn btn-success form-control" />
             </div>
 
             <div class="col-md-2">
@@ -37,4 +33,3 @@
         </div>
     </div>
 </form>
-

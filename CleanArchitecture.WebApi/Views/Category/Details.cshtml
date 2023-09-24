@@ -1,0 +1,31 @@
+﻿@model CleanArchitecture.Application.DTOs.CategoryDTO
+
+@{
+    ViewData["Title"] = "Details Category";
+}
+
+<div class="container">
+    <h3>@ViewData["Title"]</h3>
+
+    <hr />
+
+    <div class="row">
+
+        <label asp-for="Name" class="control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div>
+            <br />
+        </div>
+
+        <div class="col-md-2">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success form-control">Edit</a>
+        </div>
+
+        <div class="col-md-2">
+            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
+        </div>
+    </div>
+</div>

@@ -1,34 +1,31 @@
 ﻿@model CleanArchitecture.Application.DTOs.CategoryDTO
 
 @{
-    ViewData["Title"] = "Register New Category";
+    ViewData["Title"] = "Delete Category";
+    ViewData["SubTitle"] = "Are you sure to delete?";
 }
 
-<style>
-    .model-lg {
-        max-width: 80%;
-    }
-</style>
+<form asp-action="Delete">
+    <input asp-for="Id" hidden />
 
-<form asp-action="Create">
     <div class="container">
         <h2>@ViewData["Title"]</h2>
+        <h4>@ViewData["SubTitle"]</h4>
 
         <hr />
 
         <div class="row">
-            <label asp-for="Name" class="control-label pt-2"></label>
+            <label asp-for="Name" class="control-label"></label>
             <div class="col-md-5">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Name" class="form-control" disabled />
             </div>
 
             <div>
-                <br /> 
+                <br />
             </div>
 
             <div class="col-md-2">
-                <input type="submit" value="Create" class="btn btn-success form-control" />
+                <input type="submit" value="Delete" class="btn btn-danger form-control" />
             </div>
 
             <div class="col-md-2">
@@ -37,4 +34,3 @@
         </div>
     </div>
 </form>
-

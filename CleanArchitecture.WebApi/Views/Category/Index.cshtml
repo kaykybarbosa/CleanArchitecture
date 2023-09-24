@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CleanArchitecture.Application.DTOs.Responses.Category.CategoryResponse>
+﻿@model IEnumerable<CleanArchitecture.Application.DTOs.CategoryDTO>
 
 @{
     ViewData["Title"] = "Categories Management";
@@ -55,7 +55,7 @@
                         </a>
                         <a asp-action="Delete" asp-route-id="@items.Id" title="Delete" class="btn btn-danger">
                             <span class="fas fa-edit">Delete</span>
-                        </a>
+                        </a>        
                     </td>
                 </tr>
             }
