@@ -32,7 +32,7 @@ namespace CleanArchitecture.Application.DTOs
 
         [MaxLength(250)]
         [DisplayName("Image")]
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         public int CategoryId { get; set; }
         //[DisplayName("Categories")]

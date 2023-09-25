@@ -1,0 +1,70 @@
+﻿@model CleanArchitecture.Application.DTOs.ProductDTO
+
+@{
+    ViewData["Title"] = "Details Product";
+}
+
+<div class="container">
+    <h3>@ViewData["Title"]</h3>
+
+    <hr />
+
+    <div class="col-12 col-lg-4 p-1 text-center">
+        @if (ViewBag.ExistImage)
+        {
+            <img src="@Model.Image" width="300" height="300"/>
+        }
+        else
+        {
+            <img src="~/images/noImage.jpeg" class="rounded-circle" width="300" height="300"/>
+        }
+    </div>
+    <div class="row">
+
+        <div class="col-2">
+            <label asp-for="Name" class="control-label pt-2"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Name" class="form-control" disabled />
+        </div>
+
+        <div class="col-2">
+            <label asp-for="Description" class="control-label pt-2"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <textarea asp-for="Description" class="form-control" disabled></textarea>
+        </div>
+
+        <div class="col-2">
+            <label asp-for="Price" class="control-label pt-2"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Price" class="form-control" disabled />
+        </div>
+
+        <div class="col-2">
+            <label asp-for="Stock" class="control-label pt-2"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Stock" class="form-control" disabled />
+        </div>
+
+        <div class="col-2">
+            <label asp-for="CategoryId" class="control-label pt-2"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control" disabled></select>
+        </div>
+
+        <div><br /></div>
+
+        <div class="col-md-2">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success form-control">Edit</a>
+        </div>
+
+        <div class="col-md-2">
+            <a asp-action="Index" class="btn btn-primary form-control">Back to list</a>
+        </div>
+
+    </div>
+</div>

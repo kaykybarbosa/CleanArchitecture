@@ -1,68 +1,66 @@
 ﻿@model CleanArchitecture.Application.DTOs.ProductDTO
 
 @{
-    ViewData["Title"] = "Register New Product";
+    ViewData["Title"] = "Delete Product";
+    ViewData["SubTitle"] = "Are you sure to Delete?";
 }
 
-<form asp-action="Create">
+<form asp-action="Delete">
     <div class="container">
         <h3>@ViewData["Title"]</h3>
-        
+        <h4 class="text-danger">@ViewData["SubTitle"]</h4>
+
         <hr />
-        
+
         <div class="row">
+            <input asp-for="Id" hidden />
+
             <div class="col-2">
                 <label asp-for="Name" class="control-label pt-2"></label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Name" class="form-control"/>
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Name" class="form-control" disabled/>
             </div>
 
             <div class="col-2">
                 <label asp-for="Description" class="control-label pt-2"></label>
             </div>
             <div class="col-10 pb-3">
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <textarea asp-for="Description" class="form-control" disabled></textarea>
             </div>
 
             <div class="col-2">
                 <label asp-for="Price" class="control-label pt-2"></label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Price" class="form-control"/>
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <input asp-for="Price" class="form-control" disabled />
             </div>
 
             <div class="col-2">
                 <label asp-for="Stock" class="control-label pt-2"></label>
             </div>
             <div class="col-10 pb-3">
-                <input asp-for="Stock" class="form-control"/>
-                <span asp-validation-for="Stock" class="text-danger"></span>
+                <input asp-for="Stock" class="form-control" disabled />
             </div>
 
             <div class="col-2">
                 <label asp-for="Image" class="control-label pt-2"></label>
             </div>
             <div class="col-10 pb-3">
-                <textarea asp-for="Image" class="form-control"></textarea>
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <textarea asp-for="Image" class="form-control" disabled></textarea>
             </div>
 
             <div class="col-2">
-                <label asp-for="CategoryId" class="control-label pt-2">Categories</label>
+                <label asp-for="CategoryId" class="control-label pt-2"></label>
             </div>
             <div class="col-10 pb-3">
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control" disabled></select>
             </div>
 
             <div><br /></div>
 
             <div class="col-md-2">
-                <input type="submit" value="Create" class="btn btn-success form-control" />
+                <input type="submit" value="Delete" class="btn btn-danger form-control" />
             </div>
 
             <div class="col-md-2">

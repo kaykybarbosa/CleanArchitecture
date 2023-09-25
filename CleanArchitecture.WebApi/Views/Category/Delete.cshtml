@@ -2,15 +2,15 @@
 
 @{
     ViewData["Title"] = "Delete Category";
-    ViewData["SubTitle"] = "Are you sure to delete?";
+    ViewData["SubTitle"] = "Are you sure to Delete?";
 }
 
 <form asp-action="Delete">
     <input asp-for="Id" hidden />
 
     <div class="container">
-        <h2>@ViewData["Title"]</h2>
-        <h4>@ViewData["SubTitle"]</h4>
+        <h3>@ViewData["Title"]</h3>
+        <h4 class="text-danger">@ViewData["SubTitle"]</h4>
 
         <hr />
 
