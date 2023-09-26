@@ -123,16 +123,45 @@ namespace CleanArchitecture.WebApi.Controllers
             if (productVM == null)
                 return NotFound();
 
-            if (productVM.Image == null)
+            var imagem = productVM.Image;
+            if (imagem != null)
+            {
+                ViewBag.ExistImage = ImagemExist(imagem).Result;
+            }
+            else
             {
                 ViewBag.ExistImage = false;
             }
-            ViewBag.ExistImage = true;
 
             var categories = await _categoryService.GetCategories();
             ViewBag.CategoryId = new SelectList(categories, "Id", "Name", productVM.CategoryId);
 
             return View(productVM);
+        }
+
+        private static async Task<bool> ImagemExist(string? imageUrl)
+        {
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    HttpResponseMessage response = await httpClient.GetAsync(imageUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        if (response.Content.Headers.ContentType.MediaType.StartsWith("image/"))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return false;
         }
     }
 }

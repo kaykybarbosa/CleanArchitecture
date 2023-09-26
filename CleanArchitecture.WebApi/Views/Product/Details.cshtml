@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details Product";
+    ViewData["linkImage"] = "https://imgs.search.brave.com/v2R7z5-8RRq2lcpWvcsDvzAViT5gAXuJZE-ryNIlZ0c/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAyLzUxLzk1LzUz/LzM2MF9GXzI1MTk1/NTM1Nl9GQVFIMFUx/eTFUWnczWmNkUEd5/YndVa0g5MGEzVkFo/Yi5qcGc";
 }
 
 <div class="container">
@@ -9,16 +10,17 @@
 
     <hr />
 
-    <div class="col-12 col-lg-4 p-1 text-center">
-        @if (ViewBag.ExistImage)
+    <div class="col-12 col-lg-4 p-1 text-center ">
+        @if (!ViewBag.ExistImage)
         {
-            <img src="@Model.Image" width="300" height="300"/>
+            <img src="@ViewData["linkImage"]" class="rounded-circle" width="300" height="300" />
         }
-        else
+        @if(ViewBag.ExistImage)
         {
-            <img src="~/images/noImage.jpeg" class="rounded-circle" width="300" height="300"/>
+            <img src="@Model.Image" class="rounded-circle myCss" width="300" height="300" />
         }
     </div>
+
     <div class="row">
 
         <div class="col-2">
