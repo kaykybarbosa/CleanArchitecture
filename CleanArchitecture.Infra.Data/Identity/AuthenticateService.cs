@@ -3,20 +3,20 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CleanArchitecture.Infra.Data.Identity
 {
-    public class AuthenticationService : IAuthenticate
+    public class AuthenticateService : IAuthenticate
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AuthenticateService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        public async Task<bool> AuthenticateAsync(string email, string password)
+        public async Task<bool> AuthenticateUserAsync(string email, string password)
         {
-            var result = await _signInManager.PasswordSignInAsync(email, password, isPersistent: false, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(email, password, false, lockoutOnFailure: false);
 
             return result.Succeeded;
         }
