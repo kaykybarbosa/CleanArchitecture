@@ -1,0 +1,50 @@
+﻿@model CleanArchitecture.WebApi.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Sign in";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Login">
+            <h2 class="mb-3">@ViewData["Title"]</h2>
+
+            <input asp-for="ReturnUrl" hidden />
+
+            <div class="form-group mb-3">
+                <label asp-for="Email" action="control-label col-md-2"></label>
+
+                <div class="col-md-10">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Password" action="control-label col-md-2"></label>
+
+                <div class="col-md-10">
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-outline-dark">Sign in</button>
+                </div>
+            </div>
+
+            <p>
+                New to Catalog?
+                <a asp-action="Register" class="link-info">Create an account</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

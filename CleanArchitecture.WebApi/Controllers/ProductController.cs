@@ -1,11 +1,13 @@
-﻿using Azure.Core;
-using CleanArchitecture.Application.DTOs;
+﻿using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Infra.Data.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CleanArchitecture.WebApi.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService _service;
@@ -90,6 +92,7 @@ namespace CleanArchitecture.WebApi.Controllers
             return View(request);
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
