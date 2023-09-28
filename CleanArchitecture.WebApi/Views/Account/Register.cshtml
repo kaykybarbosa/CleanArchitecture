@@ -4,12 +4,12 @@
     ViewData["Title"] = "Register new User";
 }
 
-
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Register">
             <h3 class="mb-3">@ViewData["Title"]</h3>
 
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group mb-3">
                 <label asp-for="Email" action="control-label col-md-2"></label>
@@ -43,10 +43,6 @@
                     <button type="submit" class="btn btn-outline-dark">Create</button>
                 </div>
             </div>
-            @*
-            <p>
-            <a asp-action="Register" class="link-info">Re</a>
-            </p> *@
         </form>
     </div>
 </div>

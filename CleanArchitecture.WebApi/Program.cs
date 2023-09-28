@@ -9,7 +9,6 @@ builder.Services.AddControllersWithViews();
 //Configure MyInfrastructure
 builder.Services.AddInfractructure(builder.Configuration);
 
-
 var app = builder.Build();
 
 var initial = app.Services.CreateScope().ServiceProvider.GetService<ISeedUserRoleInitial>();
@@ -27,8 +26,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-initial.SeedRoles();
-initial.SeedUsers();
+initial?.SeedRoles();
+initial?.SeedUsers();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -31,16 +31,21 @@ namespace CleanArchitecture.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginVM)
         {
-            var result = await _authenticate.AuthenticateUserAsync(loginVM.Email, loginVM.Password);
-            if (result)
+            if (ModelState.IsValid)
             {
-                if (loginVM.ReturnUrl.IsNullOrEmpty())
-                    return RedirectToAction("Index", "Home");
+                var result = await _authenticate.AuthenticateUserAsync(loginVM.Email, loginVM.Password);
+                if (result)
+                {
+                    if (loginVM.ReturnUrl.IsNullOrEmpty())
+                        return RedirectToAction("Index", "Home");
 
-                return Redirect(loginVM.ReturnUrl);
+                    return Redirect(loginVM.ReturnUrl);
+                }
+
+                ModelState.AddModelError(string.Empty, $"Invalid login for {loginVM.Email}");
+                return View(loginVM);
             }
 
-            ModelState.AddModelError(string.Empty, "Invalid login attempt (password must be strong).");
             return View(loginVM);
         }
 
@@ -53,20 +58,36 @@ namespace CleanArchitecture.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerVM)
         {
-            var result = await _authenticate.RegisterUserAsync(registerVM.Email, registerVM.Password);
-            if (result)
-                return Redirect("/");
-            else
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Invalid Register attemp (password must be strong).");
+                var emailNoExist = await _authenticate.FindEmailAsync(registerVM.Email);
+                if (emailNoExist)
+                {
+                    var result = await _authenticate.RegisterUserAsync(registerVM.Email, registerVM.Password);
+                    if (result)
+                        return Redirect("/");
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid Register attemp (password must be strong).");
+                        return View(registerVM);
+                    }
+                }
+
+                ModelState.AddModelError(string.Empty, $"Email '{registerVM.Email}' is already in use.");
                 return View(registerVM);
             }
+
+            return View(registerVM);
         }
 
         public async Task<IActionResult> Logout()
         {
             await _authenticate.Logout();
-            return Redirect("/Account/Login");
+            LoginViewModel loginVM = new()
+            {
+                ReturnUrl = "/Account/Login"
+            };
+            return RedirectToAction("Login", loginVM);
         }
     }
 }
