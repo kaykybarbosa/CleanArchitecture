@@ -14,34 +14,34 @@ namespace CleanArchitecture.Infra.Data.Identity
             _roleManager = roleManager;
         }
 
-        public void SeedUsers()
+        public async Task SeedUsers()
         {
-            if (_userManager.FindByEmailAsync("usertest@gmail.com").Result == null)
+            if (_userManager.FindByEmailAsync("userdefault@gmail.com").Result == null)
             {
                 ApplicationUser user = new()
                 {
-                    UserName = "usersuprem",
-                    Email = "usertest@gmail.com",
+                    UserName = "userDefault",
+                    Email = "userdefault@gmail.com",
                     NormalizedUserName = "USERSUPREM",
-                    NormalizedEmail = "USERTEST@GMAIL.COM",
+                    NormalizedEmail = "USERDEFAULT@GMAIL.COM",
                     EmailConfirmed = true,
                     LockoutEnabled = false,
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
 
-                IdentityResult result = _userManager.CreateAsync(user, "User@2023").Result;
-                if (result.Succeeded) 
-                {   
-                    _userManager.AddToRoleAsync(user, Roles.User).Wait();
+                IdentityResult result = await _userManager.CreateAsync(user, "@UserDefault123");
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, Roles.User);
                 }
             }
-            
-            if (_userManager.FindByEmailAsync("admintest@gmail.com").Result == null)
+
+            if (_userManager.FindByEmailAsync("superadmin@gmail.com").Result == null)
             {
                 ApplicationUser user = new()
                 {
-                    UserName = "adminsuprem",
-                    Email = "admintest@gmail.com",
+                    UserName = "superadmin",
+                    Email = "superadmin@gmail.com",
                     NormalizedUserName = "ADMINSUPREM",
                     NormalizedEmail = "ADMINTEST@GMAIL.COM",
                     EmailConfirmed = true,
@@ -49,15 +49,15 @@ namespace CleanArchitecture.Infra.Data.Identity
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
 
-                IdentityResult result = _userManager.CreateAsync(user, "Admin@2023").Result;
-                if (result.Succeeded) 
+                IdentityResult result = await _userManager.CreateAsync(user, "Admin@2023");
+                if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, Roles.Admin).Wait();
+                    await _userManager.AddToRoleAsync(user, Roles.Admin);
                 }
             }
         }
 
-        public void SeedRoles()
+        public async Task SeedRoles()
         {
             if (!_roleManager.RoleExistsAsync(Roles.User).Result)
             {
@@ -67,7 +67,7 @@ namespace CleanArchitecture.Infra.Data.Identity
                     NormalizedName = Roles.User.ToUpper()
                 };
 
-                _roleManager.CreateAsync(role);
+                await _roleManager.CreateAsync(role);
             }
 
             if (!_roleManager.RoleExistsAsync(Roles.Admin).Result)
@@ -78,7 +78,7 @@ namespace CleanArchitecture.Infra.Data.Identity
                     NormalizedName = Roles.Admin.ToUpper()
                 };
 
-                _roleManager.CreateAsync(role);
+                await _roleManager.CreateAsync(role);
             }
         }
     }

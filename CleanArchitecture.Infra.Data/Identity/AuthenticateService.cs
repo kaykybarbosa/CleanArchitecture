@@ -30,7 +30,7 @@ namespace CleanArchitecture.Infra.Data.Identity
             };
 
             var result = await _userManager.CreateAsync(user, password);
-            if (result.Succeeded) 
+            if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
             }
@@ -41,6 +41,16 @@ namespace CleanArchitecture.Infra.Data.Identity
         public async Task Logout()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<bool> FindEmailAsync(string email)
+        {
+            var exist = await _userManager.FindByEmailAsync(email);
+
+            if (exist == null)
+                return true;
+
+            return false;
         }
     }
 }
