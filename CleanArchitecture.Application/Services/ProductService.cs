@@ -9,7 +9,7 @@ namespace CleanArchitecture.Application.Services
 {
     public class ProductService : IProductService
     {
-        private IMediator _mediator;
+        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
         public ProductService(IMediator mediator, IMapper mapper)
@@ -20,9 +20,7 @@ namespace CleanArchitecture.Application.Services
 
         public async Task<IEnumerable<ProductDTO>> GetAll()
         {
-            var productQuery = new GetProductsQuery();
-
-            if (productQuery == null)
+            var productQuery = new GetProductsQuery() ?? 
                 throw new ApplicationException("Entity could not be loaded.");
 
             var products = await _mediator.Send(productQuery);
@@ -32,9 +30,7 @@ namespace CleanArchitecture.Application.Services
 
         public async Task<ProductDTO> GetById(int? id)
         {
-            var productQuery = new GetProductByIdQuery(id.Value);
-
-            if (productQuery == null)
+            var productQuery = new GetProductByIdQuery(id.Value) ?? 
                 throw new ApplicationException("Entity could not be loaded.");
 
             var product = await _mediator.Send(productQuery);
@@ -59,8 +55,7 @@ namespace CleanArchitecture.Application.Services
 
         public async Task Remove(int? id)
         {
-            var productCommand = new ProductRemoveCommand(id.Value);
-            if (productCommand == null)
+            var productCommand = new ProductRemoveCommand(id.Value) ??
                 throw new ApplicationException("Entity could not be loaded.");
 
             await _mediator.Send(productCommand);
