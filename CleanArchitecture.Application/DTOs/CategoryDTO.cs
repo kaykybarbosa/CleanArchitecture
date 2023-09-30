@@ -8,7 +8,5 @@ namespace CleanArchitecture.Application.DTOs
         [MaxLength(100)]
         [Required(ErrorMessage = "This Name is Required")]
         public string Name { get; set; }
-
-        //public IEnumerable<Product> Products { get; set; }
     }
 }

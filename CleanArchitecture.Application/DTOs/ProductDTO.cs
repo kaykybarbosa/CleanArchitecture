@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using CleanArchitecture.Domain.Entities;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CleanArchitecture.Application.DTOs
 {
@@ -37,7 +39,8 @@ namespace CleanArchitecture.Application.DTOs
         public string? Image { get; set; }
 
         public int CategoryId { get; set; }
-        //[DisplayName("Categories")]
-        //public Category Category { get; set; }
+        [JsonIgnore]
+        [DisplayName("Category")]
+        public Category Category { get; set; }
     }
 }
