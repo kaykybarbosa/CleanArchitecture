@@ -18,6 +18,7 @@ namespace CleanArchitecture.Application.DTOs
         [Required(ErrorMessage = "This Description is Required")]
         public string Description { get; set; }
 
+        [MinLength(0)]
         [DisplayName("Price")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(10,2)")]
@@ -25,6 +26,7 @@ namespace CleanArchitecture.Application.DTOs
         [Required(ErrorMessage = "This Price is Required")]
         public decimal Price { get; set; }
 
+        [MinLength(0)]
         [Range(1, 9999)]
         [DisplayName("Stock")]
         [Required(ErrorMessage = "This Stock is Required")]
