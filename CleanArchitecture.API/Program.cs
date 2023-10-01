@@ -2,16 +2,17 @@ using CleanArchitecture.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// My infrastructures
+builder.Services.AddInfrastructureApi(builder.Configuration);
+builder.Services.AddInfrastructureJwt(builder.Configuration);
+builder.Services.AddInfrastructureSwagger();
 
+// Add services to the container.
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-//Infrastructure
-builder.Services.AddInfractructureApi(builder.Configuration);
-
+ 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +24,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStatusCodePages();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

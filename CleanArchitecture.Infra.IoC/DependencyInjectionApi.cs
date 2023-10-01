@@ -16,7 +16,7 @@ namespace CleanArchitecture.Infra.IoC
 {
     public static class DependencyInjectionApi
     {
-        public static IServiceCollection AddInfractructureApi(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructureApi(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
